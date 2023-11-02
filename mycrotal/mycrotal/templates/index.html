@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <title>Mycrotal</title>
-</head>
-<body>
+{% extends "header.html" %}
 
-<!-- Incluimos el encabezado común -->
-<header>
-    <include src="header.html"></include>
-</header>
-    <br>
-    <button>Escanear QR</button>
+{% block titulo_columna_izquierda %}
+    <div class="text-center">
+        <h5>Navegación</h5>
+    </div>
+{% endblock titulo_columna_izquierda %}
 
-</body>
-</html>
+{% block content_columna_izquierda %}
+    <ul class="list-group">
+        <li class="list-group-item"><a href="#">Leer QR</a></li>
+        <li class="list-group-item"><a href="#">Líneas</a></li>
+        <li class="list-group-item"><a href="#">Paraderos</a></li>
+        <li class="list-group-item"><a href="#">Acerca de</a></li>
+    </ul>
+{% endblock %}

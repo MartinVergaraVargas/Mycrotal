@@ -4,6 +4,9 @@ class Linea(models.Model):
     nombre = models.CharField(max_length=100)
     numero = models.CharField(max_length=10, primary_key=True)
 
+    """    id = models.CharField(max_length=10, primary_key=True)
+    nombre = models.CharField(max_length=100)"""
+
     def __str__(self):
         return self.nombre
 
