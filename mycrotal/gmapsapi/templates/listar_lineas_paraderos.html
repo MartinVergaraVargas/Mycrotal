@@ -1,0 +1,54 @@
+<!-- listar_lineas_paraderos.html -->
+<h1>Líneas</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Número</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for linea in lineas %}
+            <tr>
+                <td>{{ linea.nombre }}</td>
+                <td>{{ linea.numero }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h1>Paraderos</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Ubicación</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for paradero in paraderos %}
+            <tr>
+                <td>{{ paradero.nombre }}</td>
+                <td>{{ paradero.ubicacion }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Agregar Nueva Línea</h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- Aquí coloca los campos del formulario para agregar una nueva línea -->
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="text" name="numero" placeholder="Número">
+    <button type="submit">Agregar Línea</button>
+</form>
+
+<h2>Agregar Nuevo Paradero</h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- Aquí coloca los campos del formulario para agregar un nuevo paradero -->
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="text" name="ubicacion" placeholder="Ubicación">
+    <button type="submit">Agregar Paradero</button>
+</form>
