@@ -26,7 +26,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'datosMicros',
     'gmapsapi',
+    'gpsArduino',
+    'lector',
+    
 ]
 
 MIDDLEWARE = [
@@ -48,6 +52,9 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'mycrotal', 'templates'),
             os.path.join(BASE_DIR, 'gmapsapi', 'templates'),
+            os.path.join(BASE_DIR, 'datosMicros', 'templates'),
+            os.path.join(BASE_DIR, 'gpsArduino', 'templates'),
+            os.path.join(BASE_DIR, 'lector', 'templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
