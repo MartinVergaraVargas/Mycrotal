@@ -3,11 +3,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import Index
+from .views import Lector
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', Index.as_view(), name='index_view'),
-    path('gmapsapi/', include('gmapsapi.urls')),
-    path('lector/', include('lector.urls')),
+
+    path('', Lector.as_view(), name='lector_view'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gmapsapi',
+    'lector',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'mycrotal', 'templates'),
             os.path.join(BASE_DIR, 'gmapsapi', 'templates'),
+            os.path.join(BASE_DIR, 'lector', 'templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -115,8 +117,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'  # URL estática para archivos de estilos y JavaScript
-STATICFILES_DIRS = ['static']  # Rutas a directorios de archivos estáticos
+STATIC_URL = '/static/'  # URL estática para archivos de estilos y JavaScript
+STATICFILES_DIRS =[
+	os.path.join(BASE_DIR, 'static')
+]  # Rutas a directorios de archivos estáticos
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
