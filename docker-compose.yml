@@ -3,6 +3,8 @@ version: "3.8"
 services:
   postgres:
     image: postgres:12.15
+    volumes:
+      - ./datosPSQL:/var/lib/postgresql/data
     restart: always
     ports: 
       - "5432:5432"
