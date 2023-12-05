@@ -8,5 +8,5 @@ from .views import Index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Index.as_view(), name='index_view'),
-    #path('gmapsapi/', include('gmapsapi.urls')),
+    path('gmapsapi/', include('gmapsapi.urls')),
 ]
