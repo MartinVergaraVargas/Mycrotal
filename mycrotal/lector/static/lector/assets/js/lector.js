@@ -62,16 +62,18 @@ const activarSonido = () => {
 qrcode.callback = (respuesta) => {
   if (respuesta) {
     //console.log(respuesta);
-    Swal.fire(respuesta)
+    //Swal.fire(respuesta)
     activarSonido();
-    encenderCamara();    
-    //cerrarCamara();    
+
+    //encenderCamara();    
+    //cerrarCamara(); 
+    window.location.href = respuesta;   
 
   }
 };
 //evento para mostrar la camara sin el boton 
 window.addEventListener('load', (e) => {
-  encenderCamara();
+  //encenderCamara();
 })
 
 
