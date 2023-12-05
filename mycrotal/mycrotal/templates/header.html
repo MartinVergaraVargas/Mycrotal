@@ -55,7 +55,7 @@
                         <a class="nav-link" href="{% url 'mostrar_mapa' %}">Paraderos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Escanear QR</a>
+                        <a class="nav-link" href="/lector">Escanear QR</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Acerca de</a>
@@ -84,13 +84,18 @@
                     <div class="card">
                         <div class="card-header text-dark">
                             <h1 class="text-center">
-                                {% block titulo_columna_izquierda %}
-                                {% endblock titulo_columna_izquierda %}
+                                <div class="text-center">
+                                    <h5>Navegación</h5>
+                                </div>
                             </h1>
                         </div>
                         <div class="card-body text-dark">
-                            {% block content_columna_izquierda %}
-                            {% endblock content_columna_izquierda %}
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="#">Leer QR</a></li>
+                                <li class="list-group-item"><a href="#">Líneas</a></li>
+                                <li class="list-group-item"><a href="#">Paraderos</a></li>
+                                <li class="list-group-item"><a href="#">Acerca de</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

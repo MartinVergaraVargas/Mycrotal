@@ -6,7 +6,7 @@ class Linea(models.Model):
         return self.nombre
 
 class Micro(models.Model):
-    patente = models.CharField(max_length=20)
+    patente = models.CharField(max_length=20, null=True, blank=True)
     idhumano = models.CharField(max_length=10, unique=True)  # Unique para asegurar identificadores únicos
     linea = models.ForeignKey(Linea, on_delete=models.CASCADE, related_name='buses', null=True, blank=True)
 
