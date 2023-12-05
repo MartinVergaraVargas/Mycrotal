@@ -1,0 +1,33 @@
+{% extends 'header.html' %}
+
+{% block title %} | Mostrar Mapa{% endblock %}
+
+{% block content %}
+  <!-- Contenido específico para mostrar el mapa -->
+  <div id="map" style="height: 400px;"></div>
+{% endblock %}
+
+{% block scripts %}
+  <!-- Agrega la API de Google Maps -->
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap" 
+    async defer></script>
+
+  <script>
+    // Función de inicialización del mapa
+    function initMap() {
+      // Coordenadas del centro de Talca
+      var talca = { lat: -35.4261, lng: -71.6485 };
+
+      // Opciones del mapa
+      var mapOptions = {
+        center: talca,
+        zoom: 14, // Ajusta el nivel de zoom según tu preferencia
+      };
+
+      // Crea el mapa
+      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      // Puedes agregar marcadores, polígonos, etc. aquí según tus necesidades.
+    }
+  </script>
+{% endblock %}

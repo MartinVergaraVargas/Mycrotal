@@ -1,3 +1,4 @@
 # Ignora entorno virtual:
 envMycrotal/
 __pycache__
+datosPSQL

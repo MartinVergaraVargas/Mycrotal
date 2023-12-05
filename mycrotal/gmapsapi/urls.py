@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import *
+from .views import mostrar_mapa
 
 urlpatterns = [
-    #path("", HomeView.as_view(), name='my_home_view'), 
-    path("mapa", MapView.as_view(), name='mapa')
-   
-
+    # Otras rutas...
+    path('mostrar-mapa/', mostrar_mapa, name='mostrar_mapa'),
 ]

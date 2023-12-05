@@ -1,55 +1,16 @@
-from django.views.generic import ListView
-from django.views import View
-from django.shortcuts import render, redirect
-from .models import *
+# views.py
 import googlemaps
+from django.shortcuts import render
 from django.conf import settings
-from .forms import *
-from datetime import datetime
 
-from django.shortcuts import render, redirect
-from .models import Linea, Paradero
+def mostrar_mapa(request):
+    context = {
+        'GOOGLE_API_KEY': settings.GOOGLE_API_KEY
+    }
+    return render(request, 'mostrarMapa.html', context)
+    #return render(request, 'gmapsapi/mostrarMapa.html', {'api_key': settings.GOOGLE_API_KEY})
 
-
-# Create your views here.
-
-def listar_lineas_paraderos(request):
-    lineas = Linea.objects.all()
-    paraderos = Paradero.objects.all()
-
-    if request.method == "POST":
-        # Procesar el formulario para agregar nuevos datos
-        # Esto dependerá de cómo estés manejando el formulario en Django
-        # Por ejemplo:
-        nombre = request.POST.get('nombre')
-        numero = request.POST.get('numero')
-        # Crear un nuevo objeto de Linea con los datos y guardarlo en la base de datos
-
-    return render(request, 'gmapsapi/listar_lineas_paraderos.html', {'lineas': lineas, 'paraderos': paraderos})
-
-
-
-class MapView(View): 
-    template_name = "mapa.html"
-
-    def get(self,request): 
-        key = settings.GOOGLE_API_KEY
-        eligable_locations = Locations.objects.filter(place_id__isnull=False)
-        locations = []
-
-        for a in eligable_locations: 
-            data = {
-                'lat': float(a.lat), 
-                'lng': float(a.lng), 
-                'name': a.name
-            }
-
-            locations.append(data)
-
-
-        context = {
-            "key":key, 
-            "locations": locations
-        }
-
-        return render(request, self.template_name, context)
+def calcular_ruta(request):
+    gmaps = googlemaps.Client(key=settings.GOOGLE_API_KEY)
+    directions_result = gmaps.directions('Paradero A', 'Paradero B', mode="transit")
+    return render(request, 'gmapsapi/calculadora_rutas.html', {'directions_result': directions_result})
