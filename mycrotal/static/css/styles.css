@@ -7,6 +7,8 @@
 }
 
 /* Establece un fondo para toda la página */
+
+
 body {
     background: #1f4037;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #99f2c8, #1f4037);  /* Chrome 10-25, Safari 5.1-6 */
