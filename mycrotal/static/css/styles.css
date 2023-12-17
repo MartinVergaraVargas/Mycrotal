@@ -10,13 +10,6 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-#map {
-  height: 400px; /* The height is 400 pixels */
-  width: 50%; /* The width is the width of the web page */
-  /*margin-top: 100px center;*/
-  margin: 90px auto;
-}
-
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -10925,4 +10918,10 @@ header.masthead .bg-circle-4 {
   header.masthead .masthead-content .masthead-subheading {
     font-size: 4rem;
   }
+}
+#map {
+  height: 400px; /* The height is 400 pixels */
+  width: 50%; /* The width is the width of the web page */
+  /*margin-top: 100px center;*/
+  margin: 90px auto;
 }
