@@ -10,4 +10,4 @@ urlpatterns = [
     path('', Index.as_view(), name='index_view'),
     path('gmapsapi/', include('gmapsapi.urls')),
     path('lector/', include('lector.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL)
