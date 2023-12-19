@@ -21,7 +21,7 @@ def generar_qr_desde_url(url, nombre_archivo):
 
 if __name__ == "__main__":
     # Ingresa la URL de tu proyecto y el nombre del archivo QR
-    url_proyecto = "http://127.0.0.1:8000/gmapsapi/mostrar-mapa/"  # Reemplaza con la URL deseada
+    url_proyecto = "http://127.0.0.1:8000/gmapsapi/mostrar-mapa/paradero_id=1"  # Reemplaza con la URL deseada
     nombre_archivo_qr = "proyecto.png"  # Nombre del archivo QR
 
     generar_qr_desde_url(url_proyecto, nombre_archivo_qr)

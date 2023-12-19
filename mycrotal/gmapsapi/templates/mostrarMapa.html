@@ -13,11 +13,17 @@
 
     function initMap() {
       // Coordenadas del centro de Talca
-      var talca = { lat: -35.4261, lng: -71.6485 };
+      {% if paradero %}
+            // Si hay un paradero, centra el mapa en sus coordenadas
+            var coordenadas = { lat: {{ paradero.ubicacion.lat }}, lng: {{ paradero.ubicacion.lng }} };
+      {% else %}
+          // Si no hay un paradero, centra el mapa en el centro de Talca
+            var coordenadas = { lat: {{ talca_coordinates.lat }}, lng: {{ talca_coordinates.lng }} };
+      {% endif %}
 
       // Opciones del mapa
       var mapOptions = {
-        center: talca,
+        center: coordenadas,
         zoom: 14, // Ajusta el nivel de zoom según tu preferencia
       };
 

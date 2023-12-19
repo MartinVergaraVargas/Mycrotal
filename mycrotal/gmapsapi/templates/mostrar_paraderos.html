@@ -1,0 +1,28 @@
+{% extends 'header.html' %}
+
+{% block title %} | Paraderos{% endblock %}
+
+{% block contenido %}
+
+<br>
+<br>
+<!-- Contenido específico para mostrar la lista de paraderos -->
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Ubicación</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for paradero in paraderos %}
+      <tr>
+        <td>{{ paradero.id }}</td>
+        <td>{{ paradero.nombre }}</td>
+        <td>{{ paradero.ubicacion }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
