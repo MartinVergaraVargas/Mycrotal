@@ -1,78 +1,154 @@
 {% extends 'header.html' %}
-
 {% block title %} | Mapa{% endblock %}
-
 {% block contenido %}
   <!-- Contenido específico para mostrar el mapa -->
   <div class="col-12 col-md-6 offset-md-3" > <div id="map" style="height: 600px;"></div></div>
-
   <!-- Agrega la API de Google Maps -->
   <script>
     var apiKey = '{{ GOOGLE_API_KEY }}';
     console.log('GOOGLE_API_KEY:', apiKey);
-
+////////////////////////////////////////////////////////////////////////////////////////////////
     function initMap() {
       // Coordenadas del centro de Talca
       {% if paradero %}
-            // Si hay un paradero, centra el mapa en sus coordenadas
-            var coordenadas = { lat: {{ paradero.ubicacion.lat }}, lng: {{ paradero.ubicacion.lng }} };
-            var mapOptions = {
-        center: coordenadas,
-        zoom: 14, // Ajusta el nivel de zoom según tu preferencia
-      };
+        // Si hay un paradero, centra el mapa en sus coordenadas
+        var coordenadas = { lat: {{ paradero.ubicacion.lat }}, lng: {{ paradero.ubicacion.lng }} };
+        var mapOptions = {
+          center: coordenadas,
+          zoom: 17, // Ajusta el nivel de zoom según tu preferencia
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        // Crea un marcador para el paradero
+        var marker = new google.maps.Marker({
+          position: coordenadas,
+          map: map,
+          title: '{{ paradero.nombre }}', // Puedes personalizar el título del marcador
+        });
 
-      // Crea un marcador para el paradero
-      var marker = new google.maps.Marker({
-        position: coordenadas,
-        map: map,
-        title: '{{ paradero.nombre }}', // Puedes personalizar el título del marcador
-      });
+        // Agrega un oyente de clic al marcador
+        marker.addListener('click', function() {
+          obtenerInformacionParadero('{{ paradero.place_id }}'); // Llama a la función para obtener información del paradero
+        });
       {% else %}
         // Si no hay un paradero, centra el mapa en el centro de Talca
         var coordenadas = { lat: {{ talca_coordinates.lat }}, lng: {{ talca_coordinates.lng }} };
-
         // Opciones del mapa
         var mapOptions = {
           center: coordenadas,
-          zoom: 14, // Ajusta el nivel de zoom según tu preferencia
+          zoom: 17, // Ajusta el nivel de zoom según tu preferencia
         };
-
         // Crea el mapa
         var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        // Puedes agregar marcadores, polígonos, etc. aquí según tus necesidades.
       {% endif %}
-
-
-      // Puedes agregar marcadores, polígonos, etc. aquí según tus necesidades.
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////
-      // Parsea la información de los paraderos desde el contexto JSON
-      var paraderos = JSON.parse('{{ paraderos|safe }}');
+////////////////////////////////////////////////////////////////////////////////////////////////
 
-      // Itera sobre los paraderos y agrega marcadores
-      paraderos.forEach(function(paradero) {
-        var ubicacion = JSON.parse(paradero.fields.ubicacion);
-        var marker = new google.maps.Marker({
-          position: { lat: ubicacion[0], lng: ubicacion[1] },
-          map: map,
-          title: paradero.fields.nombre,
-        });
-
-        // Puedes personalizar los marcadores según tus necesidades
-        // Por ejemplo, puedes agregar un evento de clic para mostrar más información.
-        marker.addListener('click', function() {
-          // Aquí puedes agregar la lógica para mostrar información sobre el paradero.
-          alert('Paradero: ' + paradero.fields.nombre);
-        });
-      });
-//////////////////////////////////////////////////////////////////////////////////////////////////
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"></script>
 {% endblock %}
 
 {% block contenidoSecundario %}
+<script>
+      function mostrarTabla(paradero) {
+      console.log('Mostrando tabla para el paradero:', paradero);
+
+      // Verifica si hay información sobre líneas de autobuses
+      if ('lineasDeMicros' in paradero) {
+        var tablaHtml = '<table><tr><th>Línea de Autobús</th><th>Tiempo Estimado (min)</th></tr>';
+        for (var i = 0; i < paradero.lineasDeMicros.length; i++) {
+          // Genera tiempos aleatorios (esto es solo un ejemplo)
+          var tiempoAleatorio = Math.floor(Math.random() * 30) + 1;
+
+          tablaHtml += '<tr><td>' + paradero.lineasDeMicros[i] + '</td><td>' + tiempoAleatorio + '</td></tr>';
+        }
+        tablaHtml += '</table>';
+
+        // Agrega la tabla al contenedor deseado (puedes personalizar el ID del contenedor)
+        document.getElementById('tabla-container').innerHTML = tablaHtml;
+      }
+
+      console.log('Fin de mostrarTabla');
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////
+    function obtenerInformacionParadero(placeId) {
+      fetch('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=' + apiKey)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error en la respuesta de la API');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.result) {
+            mostrarTabla(data.result);
+          } else {
+            console.error('La respuesta de la API no contiene información válida:', data);
+          }
+        })
+        .catch(error => console.error('Error al obtener detalles del lugar:', error));
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////
+    function agregarListenerAMarcador(marker, placeId) {
+      marker.addListener('click', function() {
+        obtenerInformacionParadero(placeId);
+      });
+}
+</script>
+
+<style>
+  #tabla-container {
+    height: 100%;
+    overflow-y: auto; /* Para habilitar el desplazamiento vertical si la tabla es larga */
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
+
+<div class="col-12 col-md-6 offset-md-3">
+  <div id="tabla-container"></div>
+</div>
+
+<script>
+  // Supongamos que tienes un array de líneas de autobús y quieres mostrarlas en la tabla.
+  var lineasDeMicros = ['Micro 1', 'Micro 2', 'Micro 3', 'Micro 4', 'Micro 5'];
+
+  function generarTiempoAleatorio() {
+    // Genera un tiempo aleatorio entre 5 y 20 minutos.
+    return Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+  }
+
+  function generarTabla() {
+    var tablaHtml = '<table><tr><th>Línea de Micros</th><th>Tiempo Estimado </th></tr>';
+    for (var i = 0; i < lineasDeMicros.length; i++) {
+      // Genera tiempos aleatorios (esto es solo un ejemplo)
+      var tiempoAleatorio = Math.floor(Math.random() * 30) + 1;
+
+      tablaHtml += '<tr><td>' + lineasDeMicros[i].Nombre + '</td><td>' + tiempoAleatorio + ' - minutos aproximadamente</td></tr>';
+    }
+    tablaHtml += '</table>';
+
+    // Agrega la tabla al contenedor deseado
+    document.getElementById('tabla-container').innerHTML = tablaHtml;
+  }
+
+
+  // Llama a la función para generar la tabla.
+  generarTabla();
+</script>
 
 {% endblock %}
