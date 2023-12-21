@@ -2,7 +2,7 @@
 import googlemaps
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
-from datosMicros.models import Paradero
+from datosMicros.models import Paradero, Linea
 from django.core.serializers import serialize
 from django.http import JsonResponse
 
@@ -19,18 +19,21 @@ def mostrar_paraderos(request):
     context = {'paraderos': paraderos}
     return render(request, 'mostrar_paraderos.html', context)
 
-
 def mostrar_mapa(request, paradero_id=None):
     talca_coordinates = {'lat': -35.4261, 'lng': -71.6485}
     if paradero_id:
         paradero = get_object_or_404(Paradero, id=paradero_id)
         latitud, longitud = map(float, paradero.ubicacion.split(', '))
+        lineasDeMicros = Linea.objects.all()
+
         context = {
             'GOOGLE_API_KEY': settings.GOOGLE_API_KEY,
             'paradero': {
                 'nombre': paradero.nombre,
-                'ubicacion': {'lat': latitud, 'lng': longitud}
+                'ubicacion': {'lat': latitud, 'lng': longitud},
+                #'nombreLinea': lineasDeMicros.nombre,
             },
+            'lineasDeMicros': lineasDeMicros,
         }
     else:
         context = {

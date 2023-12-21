@@ -112,7 +112,7 @@ hr {
   opacity: 0.25;
 }
 
-h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+h7, .h7, h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -162,6 +162,10 @@ h5, .h5 {
 
 h6, .h6 {
   font-size: 1rem;
+}
+h7, .h7 {
+  font-size: 0.75rem;
+   font-weight: 600;
 }
 
 p {
@@ -10866,6 +10870,7 @@ header.masthead {
   background-attachment: scroll;
   background-size: cover;
 }
+
 header.masthead .masthead-content {
   z-index: 1;
   position: relative;
@@ -10921,7 +10926,28 @@ header.masthead .bg-circle-4 {
 }
 #map {
   height: 400px; /* The height is 400 pixels */
-  width: 50%; /* The width is the width of the web page */
+  width: 100%; /* The width is the width of the web page */
   /*margin-top: 100px center;*/
   margin: 90px auto;
 }
+        /* Estilos para el botón con flecha */
+        .btn-back {
+            background-color: #2d252d; /* Color azul (puedes ajustar esto) */
+            color: #fff; /* Texto blanco */
+            padding: 10px 20px; /* Ajusta el relleno según sea necesario */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Estilo para cambiar el cursor al pasar el mouse */
+        .btn-back:hover {
+            background-color: #0056b3; /* Cambio de color al pasar el mouse */
+        }
+
+        /* Estilo para la flecha */
+        .btn-back::before {
+            content: '\2190'; /* Código Unicode para una flecha hacia la izquierda */
+            margin-right: 5px; /* Espacio entre la flecha y el texto */
+        }
