@@ -107,22 +107,26 @@
   #tabla-container {
     height: 100%;
     overflow-y: auto; /* Para habilitar el desplazamiento vertical si la tabla es larga */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo transparente opaco */
+    padding: 10px; /* Añadir un poco de espacio alrededor de la tabla */
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    color: #000; /* Color de texto negro */
   }
 
   th, td {
-    border: 1px solid #dddddd;
+    border: 1px solid #636363;
     text-align: left;
     padding: 8px;
   }
 
   th {
-    background-color: #f2f2f2;
+    background-color: #474747;
+    color: #fff; /* Color de texto blanco para encabezados */
   }
 </style>
 
@@ -132,30 +136,35 @@
 
 <script>
   // Supongamos que tienes un array de líneas de autobús y quieres mostrarlas en la tabla.
-  var lineasDeMicros = ['Micro 1', 'Micro 2', 'Micro 3', 'Micro 4', 'Micro 5'];
 
-  function generarTiempoAleatorio() {
-    // Genera un tiempo aleatorio entre 5 y 20 minutos.
-    return Math.floor(Math.random() * (20 - 5 + 1)) + 5;
-  }
+  {% if paradero %}
 
-  function generarTabla() {
-    var tablaHtml = '<table><tr><th>Línea de Micros</th><th>Tiempo Estimado </th></tr>';
-    for (var i = 0; i < lineasDeMicros.length; i++) {
-      // Genera tiempos aleatorios (esto es solo un ejemplo)
-      var tiempoAleatorio = Math.floor(Math.random() * 30) + 1;
+      var lineasDeMicros = ['A', 'B', 'C', '7', '5', '2'];
 
-      tablaHtml += '<tr><td>' + lineasDeMicros[i].Nombre + '</td><td>' + tiempoAleatorio + ' - minutos aproximadamente</td></tr>';
-    }
-    tablaHtml += '</table>';
+      function generarTiempoAleatorio() {
+        // Genera un tiempo aleatorio entre 5 y 20 minutos.
+        return Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+      }
 
-    // Agrega la tabla al contenedor deseado
-    document.getElementById('tabla-container').innerHTML = tablaHtml;
-  }
+      function generarTabla() {
+        var tablaHtml = '<table><tr><th>Línea de Micros</th><th>Tiempo Estimado </th></tr>';
+        for (var i = 0; i < lineasDeMicros.length; i++) {
+          // Genera tiempos aleatorios (esto es solo un ejemplo)
+          var tiempoAleatorio = Math.floor(Math.random() * 30) + 1;
+
+          tablaHtml += '<tr><td>' + lineasDeMicros[i] + '</td><td>' + tiempoAleatorio + ' - minutos aproximadamente</td></tr>';
+        }
+        tablaHtml += '</table>';
+
+        // Agrega la tabla al contenedor deseado
+        document.getElementById('tabla-container').innerHTML = tablaHtml;
+      }
 
 
-  // Llama a la función para generar la tabla.
-  generarTabla();
+      // Llama a la función para generar la tabla.
+      generarTabla();
+  {% endif %}
+
 </script>
 
 <br>

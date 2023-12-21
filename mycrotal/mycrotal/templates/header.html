@@ -26,7 +26,7 @@
                     <ul class="navbar-nav ms-auto">
                         <a class="nav-link" href="/lector">Escanear QR</a>
                         <a class="nav-link" href="{% url 'mostrar_mapa' %}">Mapa</a>
-                        <a class="nav-link" href="{% url 'mostrar_paraderos' %}">Paraderos</a>
+                        <!--<a class="nav-link" href="{% url 'mostrar_paraderos' %}">Paraderos</a>-->
                     </ul>
                 </div>
             </div>
@@ -34,13 +34,11 @@
                 <!-- Header-->
         <header class="masthead text-center text-white">
             <div class="masthead-content">
-                <div class="container px-5">
 {% block contenido %}
 {% endblock %}
 {% block contenidoSecundario %}
 {% endblock %}
 
-                </div>
             </div>
             <div class="bg-circle-1 bg-circle"></div>
             <div class="bg-circle-2 bg-circle"></div>
