@@ -10919,3 +10919,21 @@ header.masthead .bg-circle-4 {
     font-size: 4rem;
   }
 }
+
+#tabla-container {
+  height: 100%;
+  overflow-y: auto; /* Para habilitar el desplazamiento vertical si la tabla es larga */
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #f2f2f2;
+}
