@@ -19,7 +19,6 @@ def mostrar_paraderos(request):
     context = {'paraderos': paraderos}
     return render(request, 'mostrar_paraderos.html', context)
 
-
 def mostrar_mapa(request, paradero_id=None):
     talca_coordinates = {'lat': -35.4261, 'lng': -71.6485}
     if paradero_id:

@@ -4,7 +4,7 @@
 
 {% block contenido %}
   <!-- Contenido específico para mostrar el mapa -->
-  <div id="map" style="height: 600px;"></div>
+  <div class="col-12 col-md-6 offset-md-3" > <div id="map" style="height: 600px;"></div></div>
 
   <!-- Agrega la API de Google Maps -->
   <script>
@@ -16,19 +16,35 @@
       {% if paradero %}
             // Si hay un paradero, centra el mapa en sus coordenadas
             var coordenadas = { lat: {{ paradero.ubicacion.lat }}, lng: {{ paradero.ubicacion.lng }} };
-      {% else %}
-          // Si no hay un paradero, centra el mapa en el centro de Talca
-            var coordenadas = { lat: {{ talca_coordinates.lat }}, lng: {{ talca_coordinates.lng }} };
-      {% endif %}
-
-      // Opciones del mapa
-      var mapOptions = {
+            var mapOptions = {
         center: coordenadas,
         zoom: 14, // Ajusta el nivel de zoom según tu preferencia
       };
 
-      // Crea el mapa
       var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      // Crea un marcador para el paradero
+      var marker = new google.maps.Marker({
+        position: coordenadas,
+        map: map,
+        title: '{{ paradero.nombre }}', // Puedes personalizar el título del marcador
+      });
+      {% else %}
+        // Si no hay un paradero, centra el mapa en el centro de Talca
+        var coordenadas = { lat: {{ talca_coordinates.lat }}, lng: {{ talca_coordinates.lng }} };
+
+        // Opciones del mapa
+        var mapOptions = {
+          center: coordenadas,
+          zoom: 14, // Ajusta el nivel de zoom según tu preferencia
+        };
+
+        // Crea el mapa
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        // Puedes agregar marcadores, polígonos, etc. aquí según tus necesidades.
+      {% endif %}
+
 
       // Puedes agregar marcadores, polígonos, etc. aquí según tus necesidades.
     }
@@ -57,6 +73,6 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"></script>
 {% endblock %}
 
-{% block scripts %}
- 
+{% block contenidoSecundario %}
+
 {% endblock %}
