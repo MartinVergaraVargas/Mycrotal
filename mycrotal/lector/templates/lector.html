@@ -1,5 +1,6 @@
 {% extends "header.html" %}
 {% load static %}
+{% block title %} | Escaner QR{% endblock %}
 {% block contenido %}
 
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -8,34 +9,38 @@
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                           
 <body>
-        <header class="masthead text-center text-white">
-            <div class="masthead-content">
-                <div class="container px-5">
-<div class="lector-container bg-white p-5">	
+
+<div class="lector-container bg-white p-5 col-md-6 mx-auto">	
     
-      <h5 class="text-center text-black">Escanear codigo QR</h5>
+      <h4 class="text-center text-black">Escanear codigo QR</h4>
+      <h6 class="text-center text-black">Para rastrear tu micro activa tu cámara y escanea el código QR del paradero donde te encuentras.</h6>
+      <br>
       <div class="row text-center">
-        <a id="btn-scan-qr" href="#">
+        <a id="btn-scan-qr">
           <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg" class="img-fluid text-center" width="175">
         <a/>
         <canvas hidden="" id="qr-canvas" class="img-fluid"></canvas>
         </div>
 	<br>
-        <button class="btn btn-success btn-sm rounded-3" onclick="encenderCamara()">Encender camara</button>
-        <button class="btn btn-danger btn-sm rounded-3" onclick="cerrarCamara()">Detener camara</button>
+        <button class="btn btn-success btn rounded-4 col-5" onclick="encenderCamara()">Encender camara</button>
+        <button class="btn btn-danger btn rounded-4 col-5" onclick="cerrarCamara()">Detener camara</button>
 	
    
   </div>
   <audio id="audioScaner" src="{% static 'lector/assets/sonido.mp3' %}"></audio>
   <script src="{% static 'lector/assets/js/lector.js' %}"></script>
-                </div>
-            </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
-        </header>
-  
+
 </body>
+<script>
+    // Función para volver atrás
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </html>
+
+{% endblock %}
+{% block contenidoSecundario %}
+<br>
+<button class="btn-back" onclick="goBack()">Volver atrás</button>
 {% endblock %}

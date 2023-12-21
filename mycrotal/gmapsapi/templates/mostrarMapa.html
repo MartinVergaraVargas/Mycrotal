@@ -3,8 +3,9 @@
 {% block title %} | Mapa{% endblock %}
 
 {% block contenido %}
+
   <!-- Contenido específico para mostrar el mapa -->
-  <div class="col-12 col-md-6 offset-md-3" > <div id="map" style="height: 600px;"></div></div>
+  <div class="col-12 col-md-10 offset-md-3 mx-auto" > <div id="map" style="height: 600px;"></div></div>
 
   <!-- Agrega la API de Google Maps -->
   <script>
@@ -70,9 +71,15 @@
       });
 //////////////////////////////////////////////////////////////////////////////////////////////////
   </script>
+  <script>
+    // Función para volver atrás
+    function goBack() {
+        window.history.back();
+    }
+</script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"></script>
 {% endblock %}
-
 {% block contenidoSecundario %}
-
+<br>
+<button class="btn-back" onclick="goBack()">Volver atrás</button>
 {% endblock %}

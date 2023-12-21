@@ -4,8 +4,10 @@
 
 {% block contenido %}
 
+
 <br>
 <br>
+
 <!-- Contenido específico para mostrar la lista de paraderos -->
 <table>
   <thead>
@@ -25,4 +27,14 @@
     {% endfor %}
   </tbody>
 </table>
+<script>
+    // Función para volver atrás
+    function goBack() {
+        window.history.back();
+    }
+</script>
+{% endblock %}
+{% block contenidoSecundario %}
+<br>
+<button class="btn-back" onclick="goBack()">Volver atrás</button>
 {% endblock %}
